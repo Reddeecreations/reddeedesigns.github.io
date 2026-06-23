@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dee-lightful Boro, Bay & Beyond Creations | Erie, PA</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for e-commerce & interactive functionality -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Satisfy&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #1A2B4A;
+            --crimson: #C8102E;
+            --gold: #F4A81D;
+            --cream: #FFF8F0;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--cream); color: var(--navy); }
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-accent { font-family: 'Satisfy', cursive; }
+        .bg-navy { background-color: var(--navy); }
+        .bg-crimson { background-color: var(--crimson); }
+        .bg-gold { background-color: var(--gold); }
+        .bg-cream { background-color: var(--cream); }
+        .text-navy { color: var(--navy); }
+        .text-crimson { color: var(--crimson); }
+        .text-gold { color: var(--gold); }
+        .text-cream { color: var(--cream); }
+        .border-gold { border-color: var(--gold); }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(26, 43, 74, 0.75), rgba(26, 43, 74, 0.85)), url('https://picsum.photos/id/1015/2000/1200');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body x-data="store()">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="sticky top-0 z-50 bg-[#1A2B4A] text-[#FFF8F0] shadow-lg px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-headline font-bold tracking-wide text-[#FFF8F0]">
+            Red <span class="text-[#F4A81D]">Dee-lightful</span>
+        </a>
+        <div class="hidden md:flex space-x-8 font-semibold">
+            <a href="#markets" class="hover:text-[#F4A81D] transition">Markets</a>
+            <a href="#products" class="hover:text-[#F4A81D] transition">Products</a>
+            <a href="#about" class="hover:text-[#F4A81D] transition">About</a>
+            <a href="#contact" class="hover:text-[#F4A81D] transition">Contact</a>
+        </div>
+        <!-- Cart Trigger button -->
+        <button @click="cartOpen = true" class="relative bg-[#C8102E] hover:bg-red-700 text-white px-4 py-2 rounded-full flex items-center space-x-2 transition">
+            <span>🛒 Cart</span>
+            <span class="bg-[#F4A81D] text-[#1A2B4A] rounded-full text-xs px-2 py-0.5 font-bold" x-text="cartCount()"></span>
+        </button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg relative text-[#FFF8F0] py-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-headline font-bold mb-6 text-[#FFF8F0]">Your Imagination, <br><span class="text-[#F4A81D]">Our Creations</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-light mb-4">Custom Sublimation Gifts & Apparel</p>
+            <p class="text-lg md:text-xl font-accent text-[#F4A81D] mb-8 tracking-wider">Local Roots. Nationwide Reach.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#contact" class="w-full sm:w-auto bg-[#C8102E] hover:bg-red-700 text-white font-bold px-8 py-4 rounded-lg shadow-lg transition transform hover:-translate-y-0.5 text-center">Get a Quote</a>
+                <a href="#products" class="w-full sm:w-auto bg-transparent border-2 border-[#F4A81D] text-[#F4A81D] hover:bg-[#F4A81D] hover:text-[#1A2B4A] font-bold px-8 py-4 rounded-lg transition text-center">See What We Print</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ERIE WEATHER HUMOR BANNER -->
+    <section class="bg-[#C8102E] text-[#FFF8F0] py-6 shadow-inner overflow-hidden border-y-4 border-[#F4A81D]">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-4xl font-black uppercase tracking-wider mb-4 animate-pulse">
+                🔥 We Print Faster Than Erie Weather Changes! 🔥
+            </h2>
+            <div class="grid grid-cols-5 gap-2 max-w-2xl mx-auto text-xs md:text-sm font-semibold">
+                <div class="bg-black/20 p-2 rounded"><div>☀️</div><div class="mt-1">lol maybe</div></div>
+                <div class="bg-black/20 p-2 rounded"><div>🌧️</div><div class="mt-1">maybe</div></div>
+                <div class="bg-black/20 p-2 rounded"><div>❄️</div><div class="mt-1">always</div></div>
+                <div class="bg-black/20 p-2 rounded"><div>💨</div><div class="mt-1">hold wig</div></div>
+                <div class="bg-black/20 p-2 rounded"><div>🌪️</div><div class="mt-1">Tuesday</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PA MAP GRAPHIC EMBED SECTION -->
+    <section class="py-12 bg-[#FFF8F0] text-center px-6">
+        <div class="max-w-md mx-auto border-2 border-dashed border-[#1A2B4A]/30 rounded-2xl p-6 bg-white shadow-sm relative">
+            <!-- Simulated PA Outline SVG -->
+            <svg class="w-full h-48 text-[#1A2B4A]/10 fill-current mx-auto" viewBox="0 0 300 180">
+                <path d="M10,20 L280,10 L290,140 L240,140 L240,165 L20,165 Z" />
+                <circle cx="35" cy="25" r="6" class="text-[#C8102E] fill-current animate-ping" />
+                <circle cx="35" cy="25" r="4" class="text-[#C8102E] fill-current" />
+                <circle cx="45" cy="55" r="4" class="text-[#F4A81D] fill-current" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col justify-center items-center p-4">
+                <p class="font-bold text-xs uppercase tracking-widest text-[#C8102E]">📍 Erie & Edinboro, PA</p>
+                <h3 class="text-2xl font-headline font-bold text-[#1A2B4A] my-1">Local Roots. Nationwide Reach.</h3>
+                <p class="text-xs text-gray-500">Serving the 814 & shipping safely coast to coast!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKETS GRID -->
+    <section id="markets" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-[#C8102E] font-bold text-xs uppercase tracking-widest">Who We Print For</span>
+            <h2 class="text-4xl font-headline font-bold text-[#1A2B4A] mt-2">Every Market under the Sun (and Snow)</h2>
+            <p class="text-gray-600 mt-2">We service over 30 custom niches. Here are just a few!</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <template x-for="market in markets">
+                <div class="bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition text-center flex flex-col justify-center items-center">
+                    <span class="text-2xl mb-1" x-text="market.icon"></span>
+                    <span class="font-medium text-sm text-[#1A2B4A]" x-text="market.name"></span>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="bg-[#1A2B4A] text-[#FFF8F0] py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12">
+                <div>
+                    <span class="text-[#F4A81D] font-bold text-xs uppercase tracking-widest">Our Catalog Store</span>
+                    <h2 class="text-4xl font-headline font-bold mt-2">What Can We Create For You?</h2>
+                </div>
+                <button @click="adminMode = !adminMode" class="mt-4 md:mt-0 bg-white/10 hover:bg-white/20 text-xs px-4 py-2 rounded-lg transition border border-white/20">
+                    <span x-text="adminMode ? '🔒 Exit Store Editor' : '🛠️ Open Store Editor (Add/Edit Products)'"></span>
+                </button>
+            </div>
+
+            <!-- ADMIN CREATION TOOL PANEL -->
+            <div x-show="adminMode" class="mb-12 bg-white text-[#1A2B4A] p-6 rounded-xl border-4 border-[#F4A81D] space-y-4" x-transition>
+                <h3 class="font-bold text-xl text-[#C8102E]">Live Inventory Editor & Custom Adder</h3>
+                <p class="text-xs text-gray-600">Modify existing storefront catalog items or inject new stock categories directly right here.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <input type="text" x-model="newProduct.name" placeholder="Item Name (e.g., Lake Erie Sunset Mug)" class="border p-2 rounded text-sm w-full">
+                    <select x-model="newProduct.category" class="border p-2 rounded text-sm w-full">
+                        <template x-for="cat in categories">
+                            <option :value="cat" x-text="cat"></option>
+                        </template>
+                    </select>
+                    <input type="number" x-model.number="newProduct.price" placeholder="Price ($)" class="border p-2 rounded text-sm w-full">
+                    <button @click="addProduct()" class="bg-[#C8102E] text-white p-2 rounded font-bold hover:bg-red-700 text-sm">Add Item to Catalog</button>
+                </div>
+            </div>
+
+            <!-- PRODUCTS SHELF GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="(prod, index) in products" :key="index">
+                    <div class="bg-[#111C32] rounded-xl overflow-hidden border border-white/10 hover:border-[#F4A81D] transition flex flex-col justify-between p-6">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-[#F4A81D] text-[#1A2B4A] text-[10px] uppercase font-bold px-2 py-0.5 rounded" x-text="prod.category"></span>
+                                <span class="text-[#F4A81D] font-bold text-lg" x-text="'$' + prod.price.toFixed(2)"></span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-4 text-white" x-text="prod.name"></h4>
+                        </div>
+                        <div class="space-y-2 mt-4">
+                            <button @click="addToCart(prod)" class="w-full bg-[#C8102E] hover:bg-red-700 text-white font-bold py-2 rounded transition text-sm">
+                                🛒 Add to Guest Order
+                            </button>
+                            <button x-show="adminMode" @click="removeProduct(index)" class="w-full bg-gray-700 hover:bg-gray-800 text-red-400 py-1 rounded text-xs">
+                                Remove Item
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 px-6 max-w-4xl mx-auto text-center">
+        <span class="text-[#C8102E] font-bold text-xs uppercase tracking-widest">Behind The Press</span>
+        <h2 class="text-4xl font-headline font-bold text-[#1A2B4A] mt-2 mb-8">From The Boro to The Bay</h2>
+        
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl space-y-6 text-left leading-relaxed text-gray-700 border-t-8 border-[#C8102E]">
+            <p class="text-lg italic text-[#1A2B4A] font-medium font-headline">
+                "Red Dee‑lightful is a hometown sublimation studio built by two Erie‑area girls — Red from the Bay and Dee from the Boro. Together, we create custom gifts that feel like they came straight from the heart of Northwestern Pennsylvania."
+            </p>
+            <p>
+                Our designs are inspired by everything that makes our region unforgettable: 
+                <strong>Lake Erie sunsets, Presque Isle summers, Edinboro charm, 814 pride</strong>, local landmarks, and the everyday life of our tight‑knit community. We also create seasonal collections for every holiday and work one‑on‑one with customers to bring their ideas to life.
+            </p>
+            <p>
+                Every mug, tumbler, tote, puzzle, and personalized gift is crafted with the same spirit that built this business — <span class="text-[#C8102E] font-bold">Your Imagination, Our Creations.</span>
+            </p>
+            <div class="bg-[#FFF8F0] p-4 rounded-xl border border-[#F4A81D] text-center font-bold text-[#1A2B4A]">
+                ✨ Made with Care, Made in Pennsylvania, Made Just for You. ✨
+            </div>
+            <p class="text-sm font-accent text-[#C8102E] text-center text-xl mt-4">
+                From the Boro to the Bay and Beyond, we print faster than Erie weather changes — and anyone from here knows that’s saying something.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT & QUOTE REQUEST FORM -->
+    <section id="contact" class="bg-gray-100 py-20 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Info Sidebar -->
+            <div class="space-y-6">
+                <span class="text-[#C8102E] font-bold text-xs uppercase tracking-widest">Let's Connect</span>
+                <h2 class="text-4xl font-headline font-bold text-[#1A2B4A]">Let's Bring Your Idea to Life</h2>
+                <p class="text-gray-600">Have a bulk team apparel order, a personalized family gift, or custom promotional items needed yesterday? Drop us a line!</p>
+                
+                <div class="space-y-4 font-medium text-[#1A2B4A]">
+                    <div class="flex items-center space-x-3"><span>📞</span> <a href="tel:8145049919" class="hover:underline">814-504-9919</a></div>
+                    <div class="flex items-center space-x-3"><span>📍</span> <span>Erie, Pennsylvania</span></div>
+                    <div class="flex items-center space-x-3"><span>📱</span> <a href="https://instagram.com/RedDeeLightful" target="_blank" class="hover:underline">@RedDeeLightful</a></div>
+                </div>
+
+                <div class="p-6 bg-[#1A2B4A] text-white rounded-xl">
+                    <p class="font-accent text-[#F4A81D] text-lg mb-2">Our Promise</p>
+                    <p class="text-xs text-gray-300">Made with Care. Made in Pennsylvania. Made Just for You.</p>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-200">
+                <h3 class="text-xl font-bold text-[#1A2B4A] mb-6">Request A Custom Design Quote</h3>
+                <form @submit.prevent="submitQuote()" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Name</label>
+                        <input type="text" x-model="quoteForm.name" required class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#C8102E]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email or Phone</label>
+                        <input type="text" x-model="quoteForm.contact" required class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#C8102E]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">What are we printing?</label>
+                        <textarea rows="4" x-model="quoteForm.message" placeholder="Describe items, quantities, or designs..." required class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:border-[#C8102E]"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-[#C8102E] hover:bg-red-700 text-white font-bold p-3 rounded transition uppercase tracking-wider text-sm shadow-md">
+                        Submit Creation Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#1A2B4A] text-white/60 py-8 px-6 text-center text-sm border-t border-white/10">
+        <p class="text-white font-bold mb-2">Red Dee-lightful Boro, Bay & Beyond Creations</p>
+        <p class="mb-4">Erie, PA · 814-504-9919 · @RedDeeLightful</p>
+        <p class="text-xs">&copy; 2026 All Rights Reserved. Crafted with 814 Pride.</p>
+    </footer>
+
+    <!-- SHOPPING CART SLIDEOUT MODAL PANEL -->
+    <div x-show="cartOpen" class="fixed inset-0 z-50 overflow-hidden" style="display: none;">
+        <div class="absolute inset-0 bg-black/50 transition-opacity" @click="cartOpen = false"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white text-[#1A2B4A] p-6 flex flex-col justify-between shadow-2xl">
+                <div>
+                    <div class="flex items-center justify-between pb-4 border-b">
+                        <h2 class="text-2xl font-bold font-headline">Your Guest Order Basket</h2>
+                        <button @click="cartOpen = false" class="text-2xl font-bold">&times;</button>
+                    </div>
+
+                    <div class="mt-8 space-y-4 overflow-y-auto max-h-[60vh]">
+                        <template x-if="cart.length === 0">
+                            <p class="text-gray-500 text-center py-8">Your cart is currently empty. Go grab some custom gear!</p>
+                        </template>
+                        <template x-for="(item, idx) in cart" :key="idx">
+                            <div class="flex justify-between items-center bg-gray-50 p-3 rounded border">
+                                <div>
+                                    <h4 class="font-bold text-sm" x-text="item.name"></h4>
+                                    <p class="text-xs text-gray-500" x-text="item.category"></p>
+                                    <p class="text-xs font-semibold text-[#C8102E]" x-text="'$' + item.price.toFixed(2)"></p>
+                                </div>
+                                <button @click="removeFromCart(idx)" class="text-red-600 font-bold hover:text-red-800 px-2 text-sm">Remove</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <div class="flex justify-between font-bold text-lg mb-4">
+                        <span>Estimated Total:</span>
+                        <span x-text="'$' + cartTotal().toFixed(2)"></span>
+                    </div>
+                    <button @click="checkout()" class="w-full bg-[#C8102E] text-white py-3 rounded-lg font-bold hover:bg-red-700 transition tracking-wide uppercase text-sm">
+                        Submit Guest Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function store() {
+            return {
+                cartOpen: false,
+                adminMode: false,
+                cart: [],
+                newProduct: { name: '', category: 'Mugs', price: 15.00 },
+                quoteForm: { name: '', contact: '', message: '' },
+                categories: ['Mugs', 'Tumblers', 'Wine Glasses', 'Apparel', 'Tote Bags', 'Koozies', 'Coasters', 'Keychains', 'Photo Gifts', 'Bottle Openers'],
+                
+                // 30 Targeted Consumer Markets
+                markets: [
+                    { name: "Lake Erie Locals", icon: "🌊" },
+                    { name: "Edinboro Eagles", icon: "🦅" },
+                    { name: "Team & Coaches", icon: "🏈" },
+                    { name: "Small Businesses", icon: "🏪" },
+                    { name: "Wedding Parties", icon: "💍" },
+                    { name: "Birthday & Milestones", icon: "🎉" },
+                    { name: "Fundraisers", icon: "🎗️" },
+                    { name: "School Spirit", icon: "📚" },
+                    { name: "Family Reunions", icon: "👨‍👩‍👧‍👦" },
+                    { name: "Tourist Shops", icon: "🗺️" },
+                    { name: "Craft Fairs", icon: "🧵" },
+                    { name: "Artists & Makers", icon: "🎨" },
+                    { name: "Holiday Collections", icon: "🎄" },
+                    { name: "Corporate Gifts", icon: "🏢" },
+                    { name: "Bachelorette Parties", icon: "🥂" },
+                    { name: "Baby Showers", icon: "🍼" },
+                    { name: "Pet Lovers", icon: "🐾" },
+                    { name: "Breweries & Bars", icon: "🍺" },
+                    { name: "Church Groups", icon: "⛪" },
+                    { name: "Running Clubs", icon: "🏃‍♀️" },
+                    { name: "Local Festivals", icon: "🎪" },
+                    { name: "Graduation Gifts", icon: "🎓" },
+                    { name: "Photographers", icon: "📸" },
+                    { name: "Real Estate Closings", icon: "🏠" },
+                    { name: "Holiday Markets", icon: "🛍️" },
+                    { name: "Outdoor Enthusiasts", icon: "⛰️" },
+                    { name: "Food Trucks", icon: "🚚" },
+                    { name: "Nonprofits", icon: "🤝" },
+                    { name: "Custom Apparel Lines", icon: "👕" },
+                    { name: "Lake House Gifts", icon: "🏖️" }
+                ],
+
+                // Seeded product catalog
+                products: [
+                    { name: "Lake Erie Sunset Mug", category: "Mugs", price: 14.00 },
+                    { name: "Presque Isle Tumbler - 20oz", category: "Tumblers", price: 22.50 },
+                    { name: "814 Pride Tee - Unisex", category: "Apparel", price: 18.00 },
+                    { name: "Edinboro Vintage Tote", category: "Tote Bags", price: 16.00 },
+                    { name: "Custom Wine Glass Pair", category: "Wine Glasses", price: 28.00 },
+                    { name: "Personalized Coaster Set (4)", category: "Coasters", price: 12.00 },
+                    { name: "Photo Puzzle 500pc", category: "Photo Gifts", price: 24.00 },
+                    { name: "Koozie - Bulk (25)", category: "Koozies", price: 30.00 },
+                    { name: "Keychain - Laser Printed", category: "Keychains", price: 6.00 }
+                ],
+
+                addProduct() {
+                    // basic validation
+                    if (!this.newProduct.name || !this.newProduct.category) {
+                        alert('Please provide an item name and category.');
+                        return;
+                    }
+                    // ensure price is a number
+                    const price = parseFloat(this.newProduct.price) || 0;
+                    this.products.push({
+                        name: this.newProduct.name,
+                        category: this.newProduct.category,
+                        price: price
+                    });
+                    // reset newProduct
+                    this.newProduct = { name: '', category: this.categories[0], price: 15.00 };
+                    // ensure adminMode remains open for quick adds
+                    this.adminMode = true;
+                },
+
+                removeProduct(index) {
+                    if (!confirm('Remove this product from the catalog?')) return;
+                    this.products.splice(index, 1);
+                },
+
+                addToCart(prod) {
+                    // push a shallow copy so later edits to catalog don't mutate cart item price
+                    this.cart.push({ name: prod.name, category: prod.category, price: prod.price });
+                    this.cartOpen = true;
+                },
+
+                removeFromCart(idx) {
+                    this.cart.splice(idx, 1);
+                },
+
+                cartCount() {
+                    return this.cart.length;
+                },
+
+                cartTotal() {
+                    return this.cart.reduce((sum, item) => sum + (Number(item.price) || 0), 0);
+                },
+
+                submitQuote() {
+                    // In a real site you'd POST to an API / send an email. For demo, log and show a confirmation.
+                    console.info('Quote request submitted:', { ...this.quoteForm });
+                    alert('Thanks! Your quote request has been received. We will contact you shortly.');
+                    // reset form
+                    this.quoteForm = { name: '', contact: '', message: '' };
+                },
+
+                checkout() {
+                    if (this.cart.length === 0) {
+                        alert('Your cart is empty.');
+                        return;
+                    }
+                    // In production: send order to backend or open checkout flow
+                    console.info('Guest order submitted:', { items: this.cart.slice(), total: this.cartTotal() });
+                    alert('Thanks! Your guest order has been submitted — we will follow up to confirm details and payment.');
+                    // clear cart and close
+                    this.cart = [];
+                    this.cartOpen = false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
